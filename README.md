@@ -7,8 +7,6 @@
 
 **Attack-adaptive, communication-aware, observability-weighted distributed filtering for heterogeneous air-ground teams.**
 
-This repository reproduces the main experiments of our IEEE TAES paper:
-
 > **Resilient Consensus Information Filtering for Heterogeneous UAV-UGV Cooperative Target Tracking Under Measurement Deception and Packet Dropouts**
 
 The proposed **ARCIF** combines:
@@ -94,14 +92,3 @@ reproducibility/
 If you find this code useful, please cite our paper (citation details will be added after publication).
 
 ---
-
-## ✉️ Contact
-
-- Shizhong Pei — shizhongpei@njust.edu.cn
-- Panlong Wu — [email to be added]
-
----
-
-## ⚠️ Note
-
-This repository is maintained for research transparency. The paper is under review at **IEEE Transactions on Aerospace and Electronic Systems**.
