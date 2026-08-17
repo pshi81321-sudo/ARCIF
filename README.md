@@ -1,44 +1,107 @@
-# ARCIF Reproducibility Package
+# ARCIF — Resilient Consensus Information Filtering for UAV–UGV Cooperative Target Tracking
 
-This package reproduces the main 500-run Monte Carlo result for the ARCIF
-challenging scenario (6-node heterogeneous network, coordinated-turn target,
-time-varying burst attacks, heavy-tailed biases, packet dropouts).
+[![MATLAB/Octave](https://img.shields.io/badge/MATLAB-Octave-orange)](#)
+[![Research Code](https://img.shields.io/badge/Research-Code-blue)](#)
+[![IEEE TAES](https://img.shields.io/badge/IEEE-TAES-green)](#)
+[![500 Monte Carlo](https://img.shields.io/badge/500-Monte%20Carlo-purple)](#)
 
-## Environment
-- GNU Octave (tested with Octave 4.2.2) or MATLAB.
-- No additional toolboxes are required.
+**Attack-adaptive, communication-aware, observability-weighted distributed filtering for heterogeneous air-ground teams.**
 
-## Run
-From the `reproducibility/` directory:
+This repository reproduces the main experiments of our IEEE TAES paper:
 
-```
+> **Resilient Consensus Information Filtering for Heterogeneous UAV-UGV Cooperative Target Tracking Under Measurement Deception and Packet Dropouts**
+
+The proposed **ARCIF** combines:
+- 🎯 **Attack-Adaptive Gate (AAG)** — adapts to time-varying deception attacks
+- 🧯 **Soft Robust Update (SRU)** — suppresses heavy-tailed biases without hard rejection
+- 🧭 **Observability-Aware Consensus Weighting (OAW)** — lets high-quality UAV measurements lead when UGV observability is poor
+
+---
+
+## 🚀 Why ARCIF?
+
+In a challenging **6-node heterogeneous scenario** with:
+
+- coordinated-turn target maneuvers,
+- time-varying burst deception attacks,
+- heavy-tailed attack biases,
+- and packet dropouts,
+
+ARCIF achieves a **position RMSE of 0.588 m**, significantly outperforming four strong baselines over **500 Monte Carlo runs** (Holm-adjusted p < 0.001):
+
+| Method | Position RMSE (m) |
+|---|---|
+| **ARCIF (ours)** | **0.588 ± 0.678** |
+| D-MCKF | 0.706 ± 0.724 |
+| Gated-DEKF | 1.514 ± 3.256 |
+| CI-DEKF | 4.692 ± 7.347 |
+| D-CIF | 4.836 ± 6.405 |
+
+---
+
+## 📦 Quick Start
+
+### Requirements
+- GNU Octave (tested on 4.2.2) or MATLAB
+- No additional toolboxes required
+
+### Run
+```bash
+cd reproducibility
 octave-cli main.m
 ```
 
-or in MATLAB:
+Or in MATLAB:
 
-```
+```matlab
 main
 ```
 
-Expected runtime: approximately 10-15 minutes for 500 Monte Carlo runs
-(5 methods, T=120, N=6) on a typical desktop.
+Expected runtime: **~10–15 minutes** for the full 500-run Monte Carlo experiment.
 
-## Outputs
-- `src/win_results_500.mat` containing:
-  - `r.methods`
-  - `r.mean_met`
-  - `r.std_met`
-  - `pvals`, `rvals`, `padj`
+---
 
-These correspond to Table V (main comparison), Table VI (Wilcoxon statistics),
-and Table VII (ablation; run `src/run_win_ablation500.m` if needed).
+## 📁 Repository Structure
 
-## Configuration
-All scenario parameters are in `src/config_win.m`.
-Seed base: 20260816.
-Derived seeds: measurement = seed+5000, dropout = seed+9000.
+```
+reproducibility/
+├── main.m                  # One-click entry point
+├── README.md
+└── src/
+    ├── config_win.m        # Scenario parameters & seeds
+    ├── config.m            # Stationary-scenario parameters
+    ├── gen_true_trajectory_ct.m
+    ├── gen_measurements_adv.m
+    ├── filter_distributed.m
+    ├── filter_ci_dekf.m
+    ├── compute_metrics.m
+    └── ...
+```
 
-## Note
-The repository URL is intentionally left as `[REPO URL]` until the user
-uploads the package and fills in the public link.
+---
+
+## 🧪 Reproducibility
+
+- **Seed base:** `20260816`
+- **Derived seeds:** measurement = seed+5000, dropout = seed+9000
+- All methods share the **same seeds, trajectories, attack realizations, and dropout realizations**.
+- Output: `win_results_500.mat` containing per-run metrics and Wilcoxon/Holm statistics.
+
+---
+
+## 📄 Citation
+
+If you find this code useful, please cite our paper (citation details will be added after publication).
+
+---
+
+## ✉️ Contact
+
+- Shizhong Pei — shizhongpei@njust.edu.cn
+- Panlong Wu — [email to be added]
+
+---
+
+## ⚠️ Note
+
+This repository is maintained for research transparency. The paper is under review at **IEEE Transactions on Aerospace and Electronic Systems**.
